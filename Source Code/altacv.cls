@@ -15,7 +15,7 @@
 \LoadClass{article}
 
 \RequirePackage[margin=2cm]{geometry}
-\RequirePackage{fontawesome,academicons}
+\RequirePackage{fontawesome}
 \RequirePackage{xcolor}
 
 \colorlet{accent}{blue!70!black}
@@ -36,10 +36,11 @@
 \RequirePackage{dashrule}
 \RequirePackage{multirow,tabularx}
 \RequirePackage{changepage}
+\RequirePackage{hyperref}
 % \RequirePackage{marginfix}
 
 \setlength{\parindent}{0pt}
-\newcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+\newcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.5pt}{0.5ex}}\medskip}
 
 \newcommand{\emailsymbol}{\faAt}
 \newcommand{\phonesymbol}{\faPhone}
@@ -48,7 +49,6 @@
 \newcommand{\linkedinsymbol}{\faLinkedin}
 \newcommand{\twittersymbol}{\faTwitter}
 \newcommand{\githubsymbol}{\faGithub}
-\newcommand{\orcidsymbol}{\aiOrcid}
 \newcommand{\mailsymbol}{\faEnvelope}
 \newcommand{\certificatesymbol}{\faCertificate}
 \newcommand{\certsymbol}{\faFileText}
@@ -58,7 +58,7 @@
 \newcommand{\name}[1]{\def\@name{#1}}
 \newcommand{\tagline}[1]{\def\@tagline{#1}}
 \newcommand{\photo}[2]{\def\@photo{#2}\def\@photodiameter{#1}}
-\newcommand{\email}[1]{\printinfo{\emailsymbol}{#1}}
+\newcommand{\email}[1]{\printinfo{\mailsymbol}{#1}}
 \newcommand{\mailaddress}[1]{\printinfo{\mailsymbol}{#1}}
 \newcommand{\phone}[1]{\printinfo{\phonesymbol}{#1}}
 \newcommand{\homepage}[1]{\printinfo{\homepagesymbol}{#1}}
@@ -75,16 +75,14 @@
     \ifdef{\@photodiameter}{\begin{minipage}{\dimexpr\linewidth-\@photodiameter-2em}}{}%
     \raggedright\color{emphasis}%
     {\Huge\bfseries\MakeUppercase{\@name}\par}
-    \medskip
+    \smallskip
     {\large\bfseries\color{accent}\@tagline\par}
-    \medskip
-    {\footnotesize\bfseries\@personalinfo\par}
     \ifdef{\@photodiameter}{%
     \end{minipage}\hfill%
     \begin{minipage}{\@photodiameter}
-    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
+    {\footnotesize\bfseries\@personalinfo\par}
     \end{minipage}\par}{}%
-  \endgroup\medskip
+  \endgroup\smallskip
 }
 
 \renewenvironment{quote}{\color{accent}\itshape\large}{\par}
@@ -93,12 +91,12 @@
   \bigskip%
   \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr1pt-\baselineskip}\raggedright\input{#1}}}% 
   {\color{heading}\LARGE\bfseries\MakeUppercase{#2}}\\[-1ex]%
-  {\color{heading-line}\rule{\linewidth}{2pt}\par}\medskip
+  {\color{heading-line}\rule{\linewidth}{2pt}\par}\smallskip
 }
 
 \newcommand{\cvsubsection}[1]{%
   \smallskip%
-  {\color{emphasis}\large\bfseries{#1}\par}\medskip
+  {\color{emphasis}\normalsize\bfseries{#1}\par}\smallskip
 }
 
 \newcommand{\cvevent}[4]{%
@@ -111,18 +109,34 @@
   \medskip
 }
 
-\newcommand{\cvproject}[5]{%
+\newcommand{\cveducation}[3]{%
   {\large\color{emphasis}#1\par}
+  \smallskip
+  \normalsize\textbf{\color{accent}#2}
+  | {\textbf{\small#3}}\par
+  \medskip
+}
+
+\newcommand{\cvclub}[4]{%
+  {\normalsize\color{emphasis}#1\par}
+  \smallskip
+  \small\textbf{\color{accent}#2}
+  | {\textbf{\footnotesize#4}}\par
+  \footnotesize{#3}\par
+  \medskip
+}
+
+\newcommand{\cvproject}[5]{%
+  {\normalsize\color{emphasis}#1 | \textbf{\footnotesize\color{accent}#4}\par}
   \smallskip
   \textbf{\color{accent}#2}\par
   \smallskip
-  \textbf{\small\color{body}#3}\par
-  \smallskip
+  \footnotesize\color{body}#3\par
   \medskip
 }
 
 \newcommand{\cveventnew}[5]{%
-  {\large\color{emphasis}#1\par}
+  {\large\color{emphasis}#1  \par}
   \smallskip
   \textbf{\color{accent}#2}\par
   \smallskip
@@ -131,6 +145,23 @@
   {\small\makebox[0.5\linewidth][l]{\faCalendar \hspace{0.5em}#4}%
   \ifstrequal{#5}{}{}{\makebox[0.5\linewidth][l]{\faMapMarker\hspace{0.5em}#5}}\par}
   \medskip
+}
+
+\newcommand{\cvexperience}[4]{%
+  \smallskip
+  {\normalsize\color{emphasis}#1  \par}
+  \smallskip
+  {\small\textbf{\color{accent}#2} | {\textbf{\footnotesize\space#4}}\par}
+  \smallskip
+  \footnotesize\color{body}#3\par
+  \smallskip
+}
+
+\newcommand{\morecvexperience}[3]{%
+  {\small\textbf{\color{accent}#1} | {\textbf{\footnotesize\space#3}}\par}
+  \smallskip
+  \footnotesize\color{body}#2\par
+  \smallskip
 }
 
 \newcommand{\cvachievement}[3]{%
@@ -142,7 +173,11 @@
 }
 
 \newcommand{\cvtag}[1]{%
-  \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+	\tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=0.95ex,inner ysep =0.70ex,text height=1.40ex,text depth=.20ex]{\small#1};
+}
+
+\newcommand{\cvlanguage}[2]{%
+	\tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex,fill={#2}]{#1};
 }
 
 \newcommand{\cvskill}[2]{%

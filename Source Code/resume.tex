@@ -22,11 +22,10 @@
 %% want to use XeLaTeX, you'll need to install
 %% Academicons.ttf in your operating system's font %% folder.
 
-
 % Change the page layout if you need to
-\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+\geometry{left=1cm,right=8.8cm,marginparwidth=6.8cm,marginparsep=1cm,top=1cm,bottom=1cm}
 
-
+% Change the font if you want to.
 
 % Change the colours if you want to
 \definecolor{VividPurple}{HTML}{3E0097}
@@ -34,10 +33,13 @@
 \definecolor{LightGrey}{HTML}{666666}
 \definecolor{DarkBlue}{HTML}{1c304b}
 \definecolor{LightBlue}{HTML}{2079c7}
+\definecolor{Purple}{HTML}{4e5266}
+\definecolor{DarkPurple}{HTML}{1E2037}
+\definecolor{LightPurple}{HTML}{656dba}
 %\colorlet{heading}{VividPurple}
-\colorlet{heading}{DarkBlue}
-\colorlet{heading-line}{LightBlue}
-\colorlet{accent}{DarkBlue}
+\colorlet{heading}{DarkPurple}
+\colorlet{heading-line}{LightPurple}
+\colorlet{accent}{Purple}
 \colorlet{emphasis}{SlateGrey}
 \colorlet{body}{LightGrey}
 
@@ -50,16 +52,19 @@
 \addbibresource{sample.bib}
 
 \begin{document}
-\name{Avan Peltier}
-\tagline{Full-Stack Software Engineer}
+\name{AVAN PELTIER}
+\tagline{Software Engineer}
+\photo{4.9cm}{}
 % Cropped to square from my github page
 \personalinfo{%
   % Not all of these are required!
   % You can add your own with \printinfo{symbol}{detail}
-  \email{tex@csh.rit.edu}
-  \phone{(210) 392-4012}
-  \github{avanpeltier}
-%   \orcid{orcid.org/0000-0000-0000-0000} % Obviously making this up too
+  \begin{flushright}
+    \normalsize
+    \email{\href{mailto:avan.peltier@yahoo.com}{avan.peltier@yahoo.com}}
+    \phone{\href{tel:12103914012}{(210) 392-4012}}
+    \github{\href{https://github.com/AvanPeltier}{avanpeltier}}
+  \end{flushright}
 }
 
 %% Make the header extend all the way to the right, if you want. Extend the right margin by 8cm (=6.8cm marginparwidth + 1.2cm marginparsep)
@@ -71,29 +76,33 @@
 %% You can always just use \marginpar{...} if you do
 %% not need to align the top of the contents to any
 %% \cvsection title in the "main" bar.
-\cvsection[page1sidebar]{Education}
+\cvsection[page1sidebar]{Experience}
 
+\cvexperience{\href{https://www.castrovilletx.gov/}{City of Castroville Regional Park Pool}}{Lifeguard}{Ensured saftey and wellness of patrons by diligently observing situations and maintaining all pool facilitier.}{Jun 2020 -- Aug 2020}
 
-\cvevent{Rochester Institute of Technology}{B.S. in Software Engineering}{2016 - 2021}{}
+\cvsection{Education}
+
+\cveducation{Rochester Institute of Technology}{B.S. in Computer Science}{2020-2025}
+
 
 \cvsection{Projects}
 
 \nocite{*}
 
-\cvproject{L.I.B.E.R.T.Y.}{github.com/AvanPeltier/L.I.B.E.R.T.Y}{A LED display board built for CSH. Goal is to create animations, images, and text to scroll across the board. I'm currently in the process of building this project.}
+\cvproject{L.I.B.E.R.T.Y}{\href{https://https://github.com/AvanPeltier/L.I.B.E.R.T.Y}{github.com/AvanPeltier/L.I.B.E.R.T.Y}}{L.I.B.E.R.T.Y is a work in progress project. Final product will be a L.E.D 3 x 3 foot display that can display animations of various CSH logos and other images. Goal will be to have a website submission upload for animation designs. Code is written to an Arduino that drives the lights that is connected to a Raspberry Pi.}{C++}
 
-\divider
-
-\cvproject{Kenny Button}{github.com/AvanPeltier/Kenny-Button}{A modified Easy button from Staples that plays quotes from fellow CSH member Kenny Kim.}
-
-\divider
-
-\cvproject{Resume Builder}{github.com/AvanPeltier/Resume-Builder}{A self-developed webpape to create custom and unique resumes.}
+\cvproject{Kenny Button}{\href{https://github.com/AvanPeltier/Kenny-Button}{github.com/AvanPeltier/Kenny-Button}}{A modified Easy button that plays quotes from fellow CSH member Kenny Kim. This was a fun successful project to introduce myself to arduino and its functionality. }{Arduino}
 
 
+
+% \cvproject{AWS Wrapper}{\href{https://github.com/SquashProjectTwo/AWS-Wrapper}{github.com/SquashProjectTwo/AWS-Wrapper}}{Created at Brickhack4, a web application that created a new UI interface for AWS, specifically EC2 by using Boto3 to immitate all the functions provided by EC2 in their current web interface. Won best use of AWS at the event.}{Python}
+
+% \cvproject{Calendar Maker}{\href{https://github.com/NHSTechTeam/Calendar-Maker}{github.com/NHSTechTeam/Calendar-Maker}}{Built a calendar generator for the high school I attended. Designed a PHP web app that generated a csv file for import into Google calendar by students and faculty. Still maintaining and hosting for the school.}{PHP}
 
 % \cvsection{}{Volunteer}
 
 % \cvproject{Software Engineer}{Zorus Inc.}{Worked as one of three Software Engineers building a customer portal and corresponding “node” from the ground up. Worked in PHP using Slim, Javascript, Python, NGINX, MySQL and AWS.}
+
+% \cvproject{wasp}{\href{https://github.com/devinmatte/wasp}{github.com/devinmatte/wasp}}{A command line utility for generating and managing web configuration files. Including the manifest.json, bower.json, package.json and composer.json. Built in Python, and packaged for Linux. Currently managing as a multiple contributor project.}{Python}
 
 \end{document}
